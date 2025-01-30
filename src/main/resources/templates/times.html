@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Times e Jogadores</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Lista de Times e Jogadores</h2>
+    
+    <table>
+        <tr>
+            <th>Time</th>
+            <th>Jogadores</th>
+        </tr>
+        <tr th:each="time : ${times}">
+            <td th:text="${time.nome}"></td>
+            <td>
+                <ul>
+                    <li th:each="jogador : ${time.jogadores}" th:text="${jogador.nome} + ' - ' + ${jogador.email}"></li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
