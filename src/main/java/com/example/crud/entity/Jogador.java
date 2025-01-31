@@ -1,27 +1,20 @@
 package com.example.crud.entity;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalDate;
 
 @Data
 @Entity
 @Table(name = "jogador")
 public class Jogador {
 
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
-	    
-	    @ManyToOne
-	    @JoinColumn(name = "time_id")
-	    private Time time;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	    private String nome;
-	    private String email;
-	    private String telefone;
-	
-	    @Column(name = "data_cadastro")
-	    private LocalDate dataCadastro;
-	}
+    private String nome;
+
+    @ManyToOne
+    @JoinColumn(name = "time_id")
+    private Time time;
+}

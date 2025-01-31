@@ -1,30 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Lista de Times e Jogadores</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
-        th, td { border: 1px solid black; padding: 10px; text-align: left; }
-        th { background-color: #f2f2f2; }
-    </style>
+    <meta charset="UTF-8">
+    <title>Times</title>
 </head>
 <body>
-    <h2 style="text-align: center;">Lista de Times e Jogadores</h2>
+    <h1>Lista de Times</h1>
+
+    <!-- Lista os times -->
+    <ul>
+        <li th:each="time : ${times}">
+            <span th:text="${time.nome}"></span>
+            
+            <!-- Botão para deletar o time (usando formulário) -->
+            <form th:action="@{/times/deletar/{id}(id=${time.id})}" method="post" style="display: inline;">
+                <button type="submit">Deletar Time</button>
+            </form>
+            
+            <!-- Lista os jogadores e seus botões de exclusão -->
+            <ul>
+                <li th:each="jogador : ${time.jogadores}">
+                    <span th:text="${jogador.nome}"></span>
+                    
+                    <!-- Botão para deletar o jogador (usando formulário) -->
+                    <form th:action="@{/jogadores/deletar/{id}(id=${jogador.id})}" method="post" style="display: inline;">
+                        <button type="submit">Deletar Jogador</button>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    </ul>
     
-    <table>
-        <tr>
-            <th>Time</th>
-            <th>Jogadores</th>
-        </tr>
-        <tr th:each="time : ${times}">
-            <td th:text="${time.nome}"></td>
-            <td>
-                <ul>
-                    <li th:each="jogador : ${time.jogadores}" th:text="${jogador.nome} + ' - ' + ${jogador.email}"></li>
-                </ul>
-            </td>
-        </tr>
-    </table>
+    <h2>Adicionar Jogador</h2>
+    <form action="/jogadores/salvar" method="post">
+        <label for="nomeJogador">Nome do Jogador:</label>
+        <input type="text" id="nomeJogador" name="nome" required>
+        
+        <label for="timeId">Time:</label>
+        <select id="timeId" name="timeId" required>
+            <option th:each="time : ${times}" th:value="${time.id}" th:text="${time.nome}"></option>
+        </select>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <h2>Adicionar Time</h2>
+    <form action="/times/salvar" method="post">
+        <label for="nome">Nome do Time:</label>
+        <input type="text" id="nome" name="nome" required>
+        
+        <button type="submit">Salvar</button>
+    </form>
+
+    <a href="/">Voltar à Página Inicial</a>
 </body>
 </html>

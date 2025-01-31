@@ -1,33 +1,30 @@
 package com.example.crud.service;
 
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.example.crud.entity.Jogador;
 import com.example.crud.repository.JogadorRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class JogadorService {
 
-    @Autowired
-    private JogadorRepository jogadorRepository;
+    private final JogadorRepository jogadorRepository;
 
-    public List<Jogador> findAll() {
+    public JogadorService(JogadorRepository jogadorRepository) {
+        this.jogadorRepository = jogadorRepository;
+    }
+
+    public void salvar(Jogador jogador) {
+        jogadorRepository.save(jogador);
+    }
+
+    public List<Jogador> listarTodos() {
         return jogadorRepository.findAll();
     }
-
-    public Jogador findById(Long id) {
-        return jogadorRepository.findById(id).orElseThrow(() -> new RuntimeException("Jogador não encontrado"));
-    }
-
-    public Jogador save(Jogador jogador) {
-        return jogadorRepository.save(jogador);
-    }
-
-    public void deleteById(Long id) {
+    
+    // Método para deletar um jogador
+    public void deletarJogador(Long id) {
         jogadorRepository.deleteById(id);
     }
 }
