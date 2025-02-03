@@ -3,55 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Times</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Lista de Times</h1>
+    <div class="container">
+        <h1>⚽ Times e Jogadores</h1>
 
-    <!-- Lista os times -->
-    <ul>
-        <li th:each="time : ${times}">
-            <span th:text="${time.nome}"></span>
-            
-            <!-- Botão para deletar o time (usando formulário) -->
-            <form th:action="@{/times/deletar/{id}(id=${time.id})}" method="post" style="display: inline;">
-                <button type="submit">Deletar Time</button>
-            </form>
-            
-            <!-- Lista os jogadores e seus botões de exclusão -->
-            <ul>
-                <li th:each="jogador : ${time.jogadores}">
-                    <span th:text="${jogador.nome}"></span>
-                    
-                    <!-- Botão para deletar o jogador (usando formulário) -->
-                    <form th:action="@{/jogadores/deletar/{id}(id=${jogador.id})}" method="post" style="display: inline;">
-                        <button type="submit">Deletar Jogador</button>
+        <!-- Lista de Times -->
+        <div class="times-container">
+            <div class="time-card" th:each="time : ${times}">
+                <div class="time-header">
+                    <h2 th:text="${time.nome}"></h2>
+                    <form th:action="@{/times/deletar/{id}(id=${time.id})}" method="post">
+                        <button type="submit" class="btn btn-delete">🗑️</button>
                     </form>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    
-    <h2>Adicionar Jogador</h2>
-    <form action="/jogadores/salvar" method="post">
-        <label for="nomeJogador">Nome do Jogador:</label>
-        <input type="text" id="nomeJogador" name="nome" required>
-        
-        <label for="timeId">Time:</label>
-        <select id="timeId" name="timeId" required>
-            <option th:each="time : ${times}" th:value="${time.id}" th:text="${time.nome}"></option>
-        </select>
+                </div>
 
-        <button type="submit">Salvar</button>
-    </form>
+                <!-- Lista de jogadores -->
+                <ul class="jogador-list">
+                    <li th:each="jogador : ${time.jogadores}">
+                        <span class="jogador-nome" th:text="${jogador.nome}"></span>
+                        <div class="jogador-actions">
+                            <form th:action="@{/jogadores/deletar/{id}(id=${jogador.id})}" method="post">
+                                <button type="submit" class="btn btn-delete">🗑️</button>
+                            </form>
+                            <a th:href="@{/jogadores/edit/{id}(id=${jogador.id})}" class="btn btn-edit">✏️</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-    <h2>Adicionar Time</h2>
-    <form action="/times/salvar" method="post">
-        <label for="nome">Nome do Time:</label>
-        <input type="text" id="nome" name="nome" required>
-        
-        <button type="submit">Salvar</button>
-    </form>
+        <!-- Formulário para adicionar jogador -->
+        <h2>➕ Adicionar Jogador</h2>
+        <form action="/jogadores/salvar" method="post" class="form">
+            <input type="text" id="nomeJogador" name="nome" placeholder="Nome do Jogador" required>
+            <select id="timeId" name="timeId" required>
+                <option value="">Selecione um Time</option>
+                <option th:each="time : ${times}" th:value="${time.id}" th:text="${time.nome}"></option>
+            </select>
+            <button type="submit" class="btn btn-save">Salvar</button>
+        </form>
 
-    <a href="/">Voltar à Página Inicial</a>
+        <!-- Formulário para adicionar time -->
+        <h2>➕ Adicionar Time</h2>
+        <form action="/times/salvar" method="post" class="form">
+            <input type="text" id="nome" name="nome" placeholder="Nome do Time" required>
+            <button type="submit" class="btn btn-save">Salvar</button>
+        </form>
+
+        <a href="/" class="btn btn-back">🏠 Voltar à Página Inicial</a>
+    </div>
 </body>
 </html>
+

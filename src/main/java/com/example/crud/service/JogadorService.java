@@ -27,4 +27,15 @@ public class JogadorService {
     public void deletarJogador(Long id) {
         jogadorRepository.deleteById(id);
     }
+    
+    public Jogador buscarPorId(Long id) {
+        return jogadorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Jogador não encontrado"));
+    }
+
+    public void atualizarNome(Long id, String nome) {
+        Jogador jogador = buscarPorId(id);
+        jogador.setNome(nome);
+        jogadorRepository.save(jogador);
+    }
 }

@@ -1,0 +1,144 @@
+/* Reset e configuração geral */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* Container principal */
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Títulos */
+h1, h2 {
+    color: #007bff;
+}
+
+/* Estilização dos times */
+.times-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Card do time */
+.time-card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho do time */
+.time-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+/* Nome do time */
+.time-header h2 {
+    font-size: 1.4em;
+    margin: 0;
+}
+
+/* Lista de jogadores */
+.jogador-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.jogador-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    background: #f8f9fa;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.jogador-nome {
+    font-weight: bold;
+}
+
+/* Ações dos jogadores */
+.jogador-actions {
+    display: flex;
+    gap: 5px;
+}
+
+/* Botões */
+.btn {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-save {
+    background: #28a745;
+    color: white;
+}
+
+.btn-save:hover {
+    background: #218838;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #c82333;
+}
+
+.btn-edit {
+    background: #ffc107;
+    color: black;
+}
+
+.btn-edit:hover {
+    background: #e0a800;
+}
+
+.btn-back {
+    background: #6c757d;
+    color: white;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.btn-back:hover {
+    background: #5a6268;
+}
+
+/* Formulários */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+input, select {
+    width: 80%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
