@@ -18,7 +18,7 @@ public class HomeController {
         this.timeService = timeService;  // Inicializando o TimeService
     }
     
-    @GetMapping("/")
+    @GetMapping({"/", "/home"})
     public String home(Model model) {
         // Mensagem de boas-vindas
         model.addAttribute("mensagem", "Bem-vindo ao Sistema de Times!");

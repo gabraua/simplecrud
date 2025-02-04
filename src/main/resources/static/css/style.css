@@ -1,144 +1,186 @@
-/* Reset e configuração geral */
+/* Resetando margens e padding para garantir um layout limpo */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f2f5;
+    background-color: #f8f9fa; /* Fundo mais claro e neutro */
     color: #333;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
+    padding: 20px;
+    line-height: 1.6;
 }
 
-/* Container principal */
+/* Container centralizado */
 .container {
-    width: 90%;
-    max-width: 800px;
-    margin-top: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Cabeçalho */
+header {
     text-align: center;
+    margin-bottom: 40px;
+    padding: 20px 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Títulos */
-h1, h2 {
-    color: #007bff;
+h1 {
+    color: #2c3e50; /* Azul escuro moderno */
+    font-size: 2.5em;
+    margin-bottom: 10px;
 }
 
-/* Estilização dos times */
-.times-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+h2 {
+    margin: 20px 0;
+    font-size: 1.8em;
+    color: #34495e; /* Azul acinzentado */
 }
 
-/* Card do time */
-.time-card {
-    background: white;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Cabeçalho do time */
-.time-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 5px;
-}
-
-/* Nome do time */
-.time-header h2 {
-    font-size: 1.4em;
-    margin: 0;
-}
-
-/* Lista de jogadores */
-.jogador-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px;
-}
-
-.jogador-list li {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    background: #f8f9fa;
-    margin: 5px 0;
-    border-radius: 5px;
-}
-
-.jogador-nome {
-    font-weight: bold;
-}
-
-/* Ações dos jogadores */
-.jogador-actions {
-    display: flex;
-    gap: 5px;
+h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
 }
 
 /* Botões */
 .btn {
+    background-color: #3498db; /* Azul moderno */
+    color: white;
     border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 14px;
+    padding: 10px 20px;
+    margin: 5px;
     cursor: pointer;
+    border-radius: 5px;
     text-decoration: none;
-    transition: 0.3s;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #2980b9; /* Azul mais escuro ao passar o mouse */
+}
+
+.btn-logout {
+    background-color: #e74c3c; /* Vermelho moderno */
+}
+
+.btn-logout:hover {
+    background-color: #c0392b; /* Vermelho mais escuro ao passar o mouse */
+}
+
+.btn-delete, .btn-edit {
+    background-color: #e74c3c; /* Vermelho moderno */
+}
+
+.btn-delete:hover, .btn-edit:hover {
+    background-color: #c0392b; /* Vermelho mais escuro ao passar o mouse */
 }
 
 .btn-save {
-    background: #28a745;
-    color: white;
+    background-color: #27ae60; /* Verde moderno */
 }
 
 .btn-save:hover {
-    background: #218838;
-}
-
-.btn-delete {
-    background: #dc3545;
-    color: white;
-}
-
-.btn-delete:hover {
-    background: #c82333;
-}
-
-.btn-edit {
-    background: #ffc107;
-    color: black;
-}
-
-.btn-edit:hover {
-    background: #e0a800;
+    background-color: #219653; /* Verde mais escuro ao passar o mouse */
 }
 
 .btn-back {
-    background: #6c757d;
-    color: white;
-    margin-top: 15px;
-    display: inline-block;
+    background-color: #95a5a6; /* Cinza moderno */
 }
 
 .btn-back:hover {
-    background: #5a6268;
+    background-color: #7f8c8d; /* Cinza mais escuro ao passar o mouse */
 }
 
 /* Formulários */
 .form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+input, select, button {
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s ease;
 }
 
 input, select {
-    width: 80%;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    width: 100%;
+}
+
+input:focus, select:focus {
+    border-color: #3498db; /* Azul moderno ao focar */
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Listas e Cartões */
+.times-container {
+    margin: 20px 0;
+}
+
+.times-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.time-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.time-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.time-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.jogador-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.jogador-nome {
+    font-weight: bold;
+    color: #2c3e50; /* Azul escuro moderno */
+}
+
+.jogador-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Efeitos de transição suave */
+a, button {
+    transition: all 0.3s ease;
+}
+
+/* Adicionando espaçamento e bordas suaves */
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
