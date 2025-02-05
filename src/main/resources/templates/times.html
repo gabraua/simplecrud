@@ -47,6 +47,8 @@
 			</div>
 		</section>
 
+
+
 		<!-- Formulários -->
 		<section class="form-container">
 			<h2>➕ Adicionar Jogador</h2>
@@ -62,11 +64,16 @@
 			</form>
 
 			<h2>➕ Adicionar Time</h2>
+			<div th:if="${erro}" class="alert alert-danger">
+				<p th:text="${erro}"></p>
+			</div>
+
 			<form action="/times/salvar" method="post" class="form">
 				<input type="text" id="nome" name="nome" placeholder="Nome do Time"
 					required>
 				<button type="submit" class="btn btn-save">Salvar</button>
 			</form>
+
 		</section>
 
 		<a href="/" class="btn btn-back">🏠 Voltar à Página Inicial</a>

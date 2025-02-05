@@ -25,10 +25,17 @@ public class TimeController {
 
 	// Adicionar um novo time
 	@PostMapping("/salvar")
-	public String salvarTime(@ModelAttribute Time time) {
-		timeService.salvar(time);
-		return "redirect:/times"; // Redireciona de volta para a lista de times
+	public String salvarTime(@ModelAttribute Time time, Model model) {
+	    try {
+	        timeService.salvar(time);
+	        return "redirect:/times";
+	    } catch (IllegalArgumentException e) {
+	        model.addAttribute("erro", e.getMessage()); // Passa a mensagem para a página
+	        model.addAttribute("times", timeService.listarTodos()); // Recarrega a lista de times
+	        return "times"; // Retorna para a página sem quebrar a aplicação
+	    }
 	}
+
 
 	// Endpoint para deletar um time
 	@PostMapping("/deletar/{id}")

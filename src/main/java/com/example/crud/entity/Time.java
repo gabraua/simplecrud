@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "time")
+@Table(name = "times", uniqueConstraints = {@UniqueConstraint(columnNames = "nome")})
 public class Time {
 
     @Id
