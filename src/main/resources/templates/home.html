@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Página Inicial</title>
-    <link rel="stylesheet" href="/css/style.css">
+<meta charset="UTF-8">
+<title>Página Inicial</title>
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>⚽ Times e seus Jogadores</h1>
+	<div class="container">
+		<h1>⚽ Times e seus Jogadores</h1>
 
-        <div class="times-container">
-            <div th:each="time : ${times}" class="time-card">
-                <h2 th:text="${time.nome}" class="time-nome"></h2>
-                <ul class="jogador-list">
-                    <li th:each="jogador : ${time.jogadores}" class="jogador-item">
-                        <span th:text="${jogador.nome}"></span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+		<div class="times-container">
+			<div th:each="time : ${times}" class="time-card">
+				<h2 th:text="${time.nome}" class="time-nome"></h2>
+				<ul class="jogador-list">
+					<li th:each="jogador : ${time.jogadores}" class="jogador-item">
+						<span th:text="${jogador.numeroCamisa + ' - ' + jogador.nome}"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
 
-        <a href="/times" class="btn btn-main">⚙️ CRUD Times e Jogadores</a>
-    </div>
+
+		<a href="/times" class="btn btn-main">⚙️ CRUD Times e Jogadores</a>
+	</div>
 </body>
 </html>
 

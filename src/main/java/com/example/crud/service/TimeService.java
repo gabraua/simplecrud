@@ -24,9 +24,12 @@ public class TimeService {
 		time.setNome(formatarNome(time.getNome()));
 		// Busca todos os times no banco de dados
 		List<Time> times = timeRepository.findAll();
-
+		if (time.getNome().length() < 3 || time.getNome().length() > 30) {
+	        throw new IllegalArgumentException("O nome do time deve ter entre 3 e 30 caracteres.");
+	    }
 		// Verifica se já existe um time com o mesmo nome
 		for (Time t : times) {
+
 			if (t.getNome().equalsIgnoreCase(time.getNome())) {
 				throw new IllegalArgumentException("Já existe um time com o nome: " + time.getNome());
 			}

@@ -26,13 +26,23 @@ public class JogadorController {
     }
 
     @PostMapping("/salvar")
-    public String salvarJogador(@RequestParam String nome, @RequestParam Long timeId) {
-        Time time = timeService.buscarPorId(timeId);
-        Jogador jogador = new Jogador();
-        jogador.setNome(nome);
-        jogador.setTime(time);
-        jogadorService.salvar(jogador);
-        return "redirect:/times";
+    public String salvarJogador(@RequestParam String nome, @RequestParam Long timeId, @RequestParam Integer numeroCamisa , Model model) {
+        try {
+            Time time = timeService.buscarPorId(timeId);
+            Jogador jogador = new Jogador();
+            jogador.setNome(nome);
+            jogador.setTime(time);
+            jogador.setNumeroCamisa(numeroCamisa);
+
+            
+            jogadorService.salvar(jogador);
+            return "redirect:/times";
+
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("erro", e.getMessage());
+            model.addAttribute("times", timeService.listarTodos()); // Mantém os times na página
+            return "times"; // Retorna para a mesma página, mostrando o erro
+        }
     }
     // Endpoint para deletar um jogador
     @PostMapping("/deletar/{id}")
@@ -51,8 +61,8 @@ public class JogadorController {
 
     // Endpoint para processar a atualização do nome do jogador
     @PostMapping("/atualizar/{id}")
-    public String atualizarJogador(@PathVariable Long id, @RequestParam String nome) {
-        jogadorService.atualizarNome(id, nome);
+    public String atualizarJogador(@PathVariable Long id, @RequestParam String nome, @RequestParam Integer numeroCamisa) {
+        jogadorService.atualizarNome(id, nome, numeroCamisa);
         return "redirect:/times"; // Redireciona de volta para a lista de times
     }
 }
