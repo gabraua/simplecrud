@@ -21,17 +21,17 @@ public class TimeService {
 	}
 
 	public void salvar(Time time) {
-		time.setNome(formatarNome(time.getNome()));
+		time.setNomeJogador(formatarNome(time.getNomeJogador()));
 		// Busca todos os times no banco de dados
 		List<Time> times = timeRepository.findAll();
-		if (time.getNome().length() < 3 || time.getNome().length() > 30) {
+		if (time.getNomeJogador().length() < 3 || time.getNomeJogador().length() > 30) {
 	        throw new IllegalArgumentException("O nome do time deve ter entre 3 e 30 caracteres.");
 	    }
 		// Verifica se já existe um time com o mesmo nome
 		for (Time t : times) {
 
-			if (t.getNome().equalsIgnoreCase(time.getNome())) {
-				throw new IllegalArgumentException("Já existe um time com o nome: " + time.getNome());
+			if (t.getNomeJogador().equalsIgnoreCase(time.getNomeJogador())) {
+				throw new IllegalArgumentException("Já existe um time com o nome: " + time.getNomeJogador());
 			}
 		}
 

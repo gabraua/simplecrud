@@ -2,91 +2,94 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Times e Jogadores</title>
+<title>Manage Teams and Players</title>
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 	<div class="container">
 		<header>
-			<h1>⚽ Times e Jogadores</h1>
+			<h1>Manager</h1>
 
 			<div class="logout-container" sec:authorize="isAuthenticated()">
 				<form th:action="@{/logout}" method="post">
 					<button type="submit" class="btn btn-logout">Logout</button>
+					<a href="/" class="btn btn-back">Back to Home</a>
 				</form>
 			</div>
 		</header>
 
-		<!-- Lista de Times -->
+		<!-- Selecionar Campeonato -->
+		<select name="campeonatoId" onchange="this.form.submit()">
+			<option value="">Select a Championship</option>
+			<option th:each="campeonato : ${campeonatos}"
+				th:value="${campeonato.id}" th:text="${campeonato.nome}"
+				th:selected="${campeonato.id == campeonatoSelecionado.id}"></option>
+		</select>
+
+		<!-- List of Teams -->
 		<section class="times-container">
-			<h2>Times</h2>
+			<h2>Teams</h2>
 			<div class="times-list">
 				<div class="time-card" th:each="time : ${times}">
 					<div class="time-header">
 						<h3 th:text="${time.nome}"></h3>
 						<form th:action="@{/times/deletar/{id}(id=${time.id})}"
 							method="post">
-							<button type="submit" class="btn btn-delete">🗑️</button>
+							<button type="submit" class="btn btn-delete">Delete Team</button>
 						</form>
 					</div>
 
-					<!-- Lista de jogadores -->
+					<!-- List of Players -->
 					<ul class="jogador-list">
 						<li th:each="jogador : ${time.jogadores}"><span
 							class="jogador-nome"
-							th:text="${jogador.numeroCamisa + ' - ' + jogador.nome}"></span>
+							th:text="${jogador.numeroCamisa + ' - ' + jogador.nome + ' ⚽ Gols: ' + jogador.gols}"></span>
 							<div class="jogador-actions">
 								<form th:action="@{/jogadores/deletar/{id}(id=${jogador.id})}"
 									method="post">
-									<button type="submit" class="btn btn-delete">🗑️</button>
+									<button type="submit" class="btn btn-delete">Delete
+										Player</button>
 								</form>
 								<a th:href="@{/jogadores/edit/{id}(id=${jogador.id})}"
-									class="btn btn-edit">✏️</a>
+									class="btn btn-edit">Edit Player</a>
 							</div></li>
 					</ul>
-
 				</div>
 			</div>
 		</section>
 
-
-
-		<!-- Formulários -->
+		<!-- Forms -->
 		<section class="form-container">
-			<h2>➕ Adicionar Jogador</h2>
-			<div th:if="${erro}" class="alert alert-danger">
-				<p th:text="${erro}"></p>
-			</div>
+			<h2>➕ Add Player</h2>
 			<form action="/jogadores/salvar" method="post" class="form">
-				<input type="text" id="nomeJogador" name="nome"
-					placeholder="Nome do Jogador" required> <select id="timeId"
-					name="timeId" required>
-					<option value="">Selecione um Time</option>
+				<input type="text" name="nome" placeholder="Player Name" required>
+				<select name="timeId" required>
+					<option value="">Select a Team</option>
 					<option th:each="time : ${times}" th:value="${time.id}"
 						th:text="${time.nome}"></option>
 				</select> <input type="number" name="numeroCamisa"
-					placeholder="Número da Camisa" min="1" max="99" required>
-
-				<button type="submit" class="btn btn-save">Salvar</button>
+					placeholder="Jersey Number" min="1" max="99" required>
+				<button type="submit" class="btn btn-save">Save</button>
 			</form>
 
-			<h2>➕ Adicionar Time</h2>
-			<div th:if="${erro}" class="alert alert-danger">
-				<p th:text="${erro}"></p>
-			</div>
-
+			<h2>➕ Add Team</h2>
 			<form action="/times/salvar" method="post" class="form">
-				<input type="text" id="nome" name="nome" placeholder="Nome do Time"
-					required>
-
-
-				<button type="submit" class="btn btn-save">Salvar</button>
+				<input type="text" name="nome" placeholder="Team Name" required>
+				<select name="campeonatoId" required>
+					<option value="">Select a Championship</option>
+					<option th:each="campeonato : ${campeonatos}"
+						th:value="${campeonato.id}" th:text="${campeonato.nome}"></option>
+				</select>
+				<button type="submit" class="btn btn-save">Save</button>
 			</form>
 
+			<h2>➕ Add Championship</h2>
+			<form action="/campeonatos/salvar" method="post" class="form">
+				<input type="text" name="nome" placeholder="Championship Name"
+					required>
+				<button type="submit" class="btn btn-save">Save</button>
+			</form>
 		</section>
-
-		<a href="/" class="btn btn-back">🏠 Voltar à Página Inicial</a>
 	</div>
 </body>
 </html>
-

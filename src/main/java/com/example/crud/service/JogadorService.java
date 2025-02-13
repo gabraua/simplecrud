@@ -43,22 +43,24 @@ public class JogadorService {
 		return jogadorRepository.findById(id).orElseThrow(() -> new RuntimeException("Jogador não encontrado"));
 	}
 
-	public void atualizarNome(Long id, String nome, Integer numeroCamisa) {
+	public void atualizarNome(Long id, String nomeJogador, Integer numeroCamisa, Integer gols) {
 		Jogador jogador = buscarPorId(id);
-		jogador.setNome(nome);
+		jogador.setNome(nomeJogador);
 		jogador.setNumeroCamisa(numeroCamisa);
+		jogador.setGols(gols);
+		
 		jogadorRepository.save(jogador);
 	}
 
-	private String formatarNome(String nome) {
-		if (nome == null || nome.trim().isEmpty()) {
-			return nome; // Retorna o mesmo valor se for nulo ou vazio
+	private String formatarNome(String nomeJogador) {
+		if (nomeJogador == null || nomeJogador.trim().isEmpty()) {
+			return nomeJogador; // Retorna o mesmo valor se for nulo ou vazio
 		}
 
-		nome = nome.trim().toLowerCase(); // Converte tudo para minúsculas primeiro
+		nomeJogador = nomeJogador.trim().toLowerCase(); // Converte tudo para minúsculas primeiro
 
 		// Divide o nome em palavras e capitaliza cada uma
-		String[] palavras = nome.split("\\s+"); // Divide por espaços
+		String[] palavras = nomeJogador.split("\\s+"); // Divide por espaços
 		StringBuilder nomeFormatado = new StringBuilder();
 
 		for (String palavra : palavras) {

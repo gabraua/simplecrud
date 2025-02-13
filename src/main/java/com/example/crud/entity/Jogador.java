@@ -28,4 +28,7 @@ public class Jogador {
     
     @Column(nullable = false)
     private Integer numeroCamisa;
+    
+    @Column
+    private Integer gols;
 }

@@ -1,4 +1,24 @@
-/* Resetando margens e padding para garantir um layout limpo */
+/* Definição de variáveis globais */
+:root {
+    --primary-color: #1e88e5;
+    --primary-dark: #1565c0;
+    --secondary-color: #c62828;
+    --secondary-dark: #8e0000;
+    --warning-color: #ff8f00;
+    --warning-dark: #ff6f00;
+    --success-color: #2e7d32;
+    --success-dark: #1b5e20;
+    --neutral-color: #546e7a;
+    --neutral-dark: #37474f;
+    --background-dark: #004040;
+    --background-darker: #0d0d0d;
+    --text-light: #f1f1f1;
+    --text-dark: #e0e0e0;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --box-shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -7,8 +27,8 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa; /* Fundo mais claro e neutro */
-    color: #333;
+    background-color: var(--background-dark);
+    color: var(--text-light);
     padding: 20px;
     line-height: 1.6;
 }
@@ -25,75 +45,123 @@ header {
     text-align: center;
     margin-bottom: 40px;
     padding: 20px 0;
-    background-color: #ffffff;
+    background-color: var(--background-darker);
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
 }
 
 h1 {
-    color: #2c3e50; /* Azul escuro moderno */
-    font-size: 2.5em;
+    color: var(--text-light);
+    font-size: 2.5rem;
     margin-bottom: 10px;
 }
 
 h2 {
     margin: 20px 0;
-    font-size: 1.8em;
-    color: #34495e; /* Azul acinzentado */
+    font-size: 1.8rem;
+    color: var(--text-dark);
 }
 
 h3 {
-    color: #2c3e50;
+    color: var(--text-light);
     margin-bottom: 10px;
 }
 
 /* Botões */
 .btn {
-    background-color: #3498db; /* Azul moderno */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
+    display: inline-block;
+    padding: 12px 24px;
+    border: 2px solid transparent;
     border-radius: 5px;
+    cursor: pointer;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease, border 0.3s ease;
 }
 
+.btn-main{
+	background-color: var(--primary-color);
+    color: white;
+    border: 2px solid var(--primary-dark);
+}
 .btn:hover {
-    background-color: #2980b9; /* Azul mais escuro ao passar o mouse */
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
-.btn-logout {
-    background-color: #e74c3c; /* Vermelho moderno */
+/* Cores específicas dos botões */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: 2px solid var(--primary-dark);
 }
 
-.btn-logout:hover {
-    background-color: #c0392b; /* Vermelho mais escuro ao passar o mouse */
+.btn-primary:hover {
+    background-color: var(--primary-dark);
 }
 
-.btn-delete, .btn-edit {
-    background-color: #e74c3c; /* Vermelho moderno */
+.btn-danger {
+    background-color: var(--secondary-color);
+    color: white;
+    border: 2px solid var(--secondary-dark);
 }
 
-.btn-delete:hover, .btn-edit:hover {
-    background-color: #c0392b; /* Vermelho mais escuro ao passar o mouse */
+.btn-danger:hover {
+    background-color: var(--secondary-dark);
 }
 
-.btn-save {
-    background-color: #27ae60; /* Verde moderno */
+.btn-warning {
+    background-color: var(--warning-color);
+    color: black;
+    border: 2px solid var(--warning-dark);
 }
 
-.btn-save:hover {
-    background-color: #219653; /* Verde mais escuro ao passar o mouse */
+.btn-warning:hover {
+    background-color: var(--warning-dark);
 }
 
-.btn-back {
-    background-color: #95a5a6; /* Cinza moderno */
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+    border: 2px solid var(--success-dark);
 }
 
-.btn-back:hover {
-    background-color: #7f8c8d; /* Cinza mais escuro ao passar o mouse */
+.btn-success:hover {
+    background-color: var(--success-dark);
+}
+
+.btn-neutral {
+    background-color: var(--neutral-color);
+    color: white;
+    border: 2px solid var(--neutral-dark);
+}
+
+.btn-neutral:hover {
+    background-color: var(--neutral-dark);
+}
+
+/* Botão para fundo escuro */
+.btn-light {
+    background-color: var(--background-darker);
+    color: var(--text-light);
+    border: 2px solid var(--neutral-dark);
+}
+
+.btn-light:hover {
+    background-color: var(--neutral-dark);
+}
+
+/* Botão com borda para fundos escuros */
+.btn-outline {
+    background: none;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
 }
 
 /* Formulários */
@@ -105,24 +173,18 @@ h3 {
 }
 
 input, select, button {
-    padding: 10px;
-    font-size: 1em;
+    padding: 12px;
+    font-size: 1rem;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--neutral-dark);
+    background-color: var(--background-darker);
+    color: var(--text-light);
     transition: border-color 0.3s ease;
 }
 
-input, select {
-    width: 100%;
-}
-
 input:focus, select:focus {
-    border-color: #3498db; /* Azul moderno ao focar */
+    border-color: var(--primary-color);
     outline: none;
-}
-
-button {
-    cursor: pointer;
 }
 
 /* Listas e Cartões */
@@ -137,16 +199,18 @@ button {
 }
 
 .time-card {
-    background-color: #ffffff;
+    background-color: var(--background-darker);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 40px /* Aumenta o espaçamento entre os times */
+;
 }
 
 .time-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--box-shadow-hover);
 }
 
 .time-header {
@@ -163,7 +227,7 @@ button {
 
 .jogador-nome {
     font-weight: bold;
-    color: #2c3e50; /* Azul escuro moderno */
+    color: var(--text-light);
 }
 
 .jogador-actions {
@@ -171,16 +235,109 @@ button {
     gap: 10px;
 }
 
-/* Efeitos de transição suave */
-a, button {
-    transition: all 0.3s ease;
-}
-
 /* Adicionando espaçamento e bordas suaves */
 section {
     margin-bottom: 40px;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: var(--background-darker);
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
 }
+
+/* Melhorando responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .times-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Efeitos de transição suave */
+a, button {
+    transition: all 0.3s ease;
+}
+.jogador-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaço entre a camisa e o nome */
+    margin-bottom: 10px;
+}
+
+.jogador-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.camisa-container {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.camisa-img {
+    width: 100%;
+    display: block;
+}
+
+.numero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.jogador-nome {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+.camisa-container {
+    position: relative;
+    width: 60px; /* Ajuste o tamanho da camisa */
+    height: 60px;
+    overflow: hidden; /* Esconde qualquer parte da imagem que ultrapasse o container */
+    border-radius: 50%; /* Transforma o container em um círculo */
+    background-color: transparent; /* Remove qualquer fundo */
+}
+
+.camisa-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transform: scale(1.2); /* Ajusta o zoom da camisa para "cortar" as bordas brancas */
+}
+
+.numero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+    z-index: 1; /* Garante que o número fique acima da camisa */
+}
+
