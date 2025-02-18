@@ -8,8 +8,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -25,12 +23,9 @@ public class Time {
     private Long id;
 
     @Column(nullable = false, length = 30) // Define no banco
-    private String nomeJogador;
+    private String nome;
 
     @OneToMany(mappedBy = "time", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Jogador> jogadores;
     
-    @ManyToOne
-    @JoinColumn(name = "campeonato_id") // Deve ser igual ao mappedBy da outra entidade
-    private Campeonato campeonato;
 }

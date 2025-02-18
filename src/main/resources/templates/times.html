@@ -18,14 +18,6 @@
 			</div>
 		</header>
 
-		<!-- Selecionar Campeonato -->
-		<select name="campeonatoId" onchange="this.form.submit()">
-			<option value="">Select a Championship</option>
-			<option th:each="campeonato : ${campeonatos}"
-				th:value="${campeonato.id}" th:text="${campeonato.nome}"
-				th:selected="${campeonato.id == campeonatoSelecionado.id}"></option>
-		</select>
-
 		<!-- List of Teams -->
 		<section class="times-container">
 			<h2>Teams</h2>
@@ -40,10 +32,12 @@
 					</div>
 
 					<!-- List of Players -->
+					<
 					<ul class="jogador-list">
 						<li th:each="jogador : ${time.jogadores}"><span
 							class="jogador-nome"
-							th:text="${jogador.numeroCamisa + ' - ' + jogador.nome + ' ⚽ Gols: ' + jogador.gols}"></span>
+							th:text="${jogador.numeroCamisa + ' - ' + jogador.nome + (jogador.gols != null && jogador.gols > 0 ? ' - Goals: ' + jogador.gols : ' -') }">
+						</span>
 							<div class="jogador-actions">
 								<form th:action="@{/jogadores/deletar/{id}(id=${jogador.id})}"
 									method="post">
@@ -54,6 +48,7 @@
 									class="btn btn-edit">Edit Player</a>
 							</div></li>
 					</ul>
+
 				</div>
 			</div>
 		</section>
@@ -75,21 +70,10 @@
 			<h2>➕ Add Team</h2>
 			<form action="/times/salvar" method="post" class="form">
 				<input type="text" name="nome" placeholder="Team Name" required>
-				<select name="campeonatoId" required>
-					<option value="">Select a Championship</option>
-					<option th:each="campeonato : ${campeonatos}"
-						th:value="${campeonato.id}" th:text="${campeonato.nome}"></option>
-				</select>
-				<button type="submit" class="btn btn-save">Save</button>
-			</form>
-
-			<h2>➕ Add Championship</h2>
-			<form action="/campeonatos/salvar" method="post" class="form">
-				<input type="text" name="nome" placeholder="Championship Name"
-					required>
 				<button type="submit" class="btn btn-save">Save</button>
 			</form>
 		</section>
 	</div>
 </body>
 </html>
+

@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.crud.entity.Campeonato;
 import com.example.crud.entity.Time;
-import com.example.crud.service.CampeonatoService;
 import com.example.crud.service.TimeService;
 
 @Controller
@@ -21,34 +19,24 @@ import com.example.crud.service.TimeService;
 public class TimeController {
 
 	 private final TimeService timeService;
-	    private final CampeonatoService campeonatoService;
 
-	    public TimeController(TimeService timeService, CampeonatoService campeonatoService) {
+	    public TimeController(TimeService timeService) {
 	        this.timeService = timeService;
-	        this.campeonatoService = campeonatoService;
 	    }
 
 	    @GetMapping
 	    public String listarTimes(@RequestParam(required = false) Long campeonatoId, Model model) {
-	        return "times";
+	        List<Time> times = timeService.listarTodos(); // Carrega todos os times
+	        model.addAttribute("times", times); // Adiciona ao modelo
+	        return "times"; // Retorna a página com os times carregados
 	    }
+
 
 
 	    @PostMapping("/salvar")
 	    public String salvarTime(@ModelAttribute Time time, Model model) {
-	        try {
-	            // Verifica se o time está associado a um campeonato
-	            if (time.getCampeonato() == null || time.getCampeonato().getId() == null) {
-	                // Cria um campeonato padrão
-	                Campeonato campeonatoPadrao = new Campeonato();
-	                campeonatoPadrao.setNomeCampeonato("Campeonato Padrão"); // Nome do campeonato padrão
-	                campeonatoService.salvar(campeonatoPadrao); // Salva o campeonato padrão no banco de dados
-
-	                // Associa o time ao campeonato padrão
-	                time.setCampeonato(campeonatoPadrao);
-	            }
-
-	            // Salva o time
+	    	try {
+				  // Salva o time
 	            timeService.salvar(time);
 	            return "redirect:/times";
 	        } catch (IllegalArgumentException e) {

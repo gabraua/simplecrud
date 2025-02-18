@@ -26,11 +26,11 @@ public class JogadorController {
     }
 
     @PostMapping("/salvar")
-    public String salvarJogador(@RequestParam String nomeJogador, @RequestParam Long timeId, @RequestParam Integer numeroCamisa , Model model) {
+    public String salvarJogador(@RequestParam String nome, @RequestParam Long timeId, @RequestParam Integer numeroCamisa , Model model) {
         try {
             Time time = timeService.buscarPorId(timeId);
             Jogador jogador = new Jogador();
-            jogador.setNome(nomeJogador);
+            jogador.setNome(nome);
             jogador.setTime(time);
             jogador.setNumeroCamisa(numeroCamisa);
 
@@ -62,8 +62,8 @@ public class JogadorController {
 
     // Endpoint para processar a atualização do nome do jogador
     @PostMapping("/atualizar/{id}")
-    public String atualizarJogador(@PathVariable Long id, @RequestParam String nomeJogador, @RequestParam Integer numeroCamisa, @RequestParam Integer gols) {
-        jogadorService.atualizarNome(id, nomeJogador, numeroCamisa, gols);
+    public String atualizarJogador(@PathVariable Long id, @RequestParam String nome, @RequestParam Integer numeroCamisa, @RequestParam Integer gols) {
+        jogadorService.atualizarNome(id, nome, numeroCamisa, gols);
         return "redirect:/times"; // Redireciona de volta para a lista de times
     }
 }
