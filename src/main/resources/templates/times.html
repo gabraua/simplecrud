@@ -25,14 +25,18 @@
 				<div class="time-card" th:each="time : ${times}">
 					<div class="time-header">
 						<h3 th:text="${time.nome}"></h3>
-						<form th:action="@{/times/deletar/{id}(id=${time.id})}"
-							method="post">
-							<button type="submit" class="btn btn-delete">Delete Team</button>
-						</form>
+						<div class="time-actions">
+							<form th:action="@{/times/deletar/{id}(id=${time.id})}"
+								method="post">
+								<button type="submit" class="btn btn-delete">Delete Team</button>
+							</form>
+							<!-- Botão para o TeamManager -->
+							<a th:href="@{/times/gerenciar/{id}(id=${time.id})}" 
+							   class="btn btn-manage">Manage Formation</a>
+						</div>
 					</div>
 
 					<!-- List of Players -->
-					<
 					<ul class="jogador-list">
 						<li th:each="jogador : ${time.jogadores}"><span
 							class="jogador-nome"
@@ -76,4 +80,3 @@
 	</div>
 </body>
 </html>
-

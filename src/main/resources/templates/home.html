@@ -21,17 +21,19 @@
 									th:text="${jogador.numeroCamisa}"></span>
 							</div>
 							<span class="jogador-nome" th:text="${jogador.nome}"></span> <span
-								class="jogador-gols">Goals: <span
+								class="jogador-gols" th:if="${jogador.gols > 0}">Goals: <span
 								th:text="${jogador.gols}"></span></span>
 						</div>
 					</li>
-
 				</ul>
-				<br>
 			</div>
 		</div>
 
-		<a href="/times" class="btn btn-main">Manage Teams and Players</a>
+		<br>
+	</div>
+	</div>
+
+	<a href="/times" class="btn btn-main">Manage Teams and Players</a>
 	</div>
 </body>
 </html>

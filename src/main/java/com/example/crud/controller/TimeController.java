@@ -31,7 +31,7 @@ public class TimeController {
 	        return "times"; // Retorna a página com os times carregados
 	    }
 
-
+	    
 
 	    @PostMapping("/salvar")
 	    public String salvarTime(@ModelAttribute Time time, Model model) {
@@ -53,5 +53,13 @@ public class TimeController {
 	    timeService.deletarTime(id);
 	    return "redirect:/times"; // Redireciona de volta para a página de times
 	}
+	
+	@GetMapping("/gerenciar/{id}")
+    public String gerenciarTime(@PathVariable Long id, Model model) {
+        Time time = timeService.buscarPorId(id);
+        
+        model.addAttribute("time", time);
+        return "team-manager"; // nome do seu template Thymeleaf para o gerenciador
+    }
 
 }
