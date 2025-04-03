@@ -31,7 +31,8 @@ public class JogadorService {
 	}
 
 	public List<Jogador> listarTodos() {
-		return jogadorRepository.findAll();
+	    return jogadorRepository.findAllOrderedByNumeroCamisa();
+
 	}
 
 	// Método para deletar um jogador
