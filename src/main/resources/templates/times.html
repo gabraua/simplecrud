@@ -40,7 +40,7 @@
 					<ul class="jogador-list">
 						<li th:each="jogador : ${time.jogadores}"><span
 							class="jogador-nome"
-							th:text="${jogador.numeroCamisa + ' - ' + jogador.nome + (jogador.gols != null && jogador.gols > 0 ? ' - Goals: ' + jogador.gols : ) }">
+							th:text="${jogador.numeroCamisa + ' - ' + jogador.nome + (jogador.gols != null && jogador.gols > 0 ? ' - Goals: ' + jogador.gols : ' ') }">
 						</span>
 							<div class="jogador-actions">
 								<form th:action="@{/jogadores/deletar/{id}(id=${jogador.id})}"
