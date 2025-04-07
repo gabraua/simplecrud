@@ -16,5 +16,6 @@ public interface JogadorRepository extends JpaRepository<Jogador, Long> {
     // Busca os jogadores já ordenados pelo número da camisa
     @Query("SELECT j FROM Jogador j ORDER BY j.numeroCamisa ASC")
     List<Jogador> findAllOrderedByNumeroCamisa();
+    
 	boolean existsByNumeroCamisaAndTime(Integer numeroCamisa, Time time);
 }
